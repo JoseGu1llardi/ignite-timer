@@ -12,8 +12,8 @@ export function App(): JSX.Element {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <Router />
-      </BrowserRouter>
 
+      </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
   )

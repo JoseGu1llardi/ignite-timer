@@ -13,7 +13,6 @@ export function App(): JSX.Element {
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-
       <GlobalStyle />
     </ThemeProvider>
   )
