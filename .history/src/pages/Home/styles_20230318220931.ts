@@ -36,28 +36,12 @@ const BaseInput = styled.input`
     font-weight: bold;
     font-size: inherit;
     padding: 0 0.5rem;
-    color: ${({ theme }) => theme["gray-100"]};
-    
-    &:focus {
-        box-shadow: none;
-        border-color: ${({ theme }) => theme["green-500"]};
-    }
-    
-    &::placeholder {
-        color: ${({ theme }) => theme["gray-500"]};
-    }
 `
 
 export const TaskInput = styled(BaseInput)`
-    flex: 1;
-    
-    &::-webkit-calendar-picker-indicator {
-        display: none !important;
-    }
 `
 
 export const MinutesAmountInput = styled(BaseInput)`
-    width: 4rem;
 `
 
 export const CountdownContainer = styled.div`

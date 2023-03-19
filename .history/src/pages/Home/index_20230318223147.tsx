@@ -19,10 +19,9 @@ export function Home() {
                     <TaskInput
                         id="task"
                         placeholder="give a name to your project..."
-                        list="tasks-suggestion"
                     />
 
-                    <datalist id="tasks-suggestion">
+                    <datalist>
                         <option value="Suggestion One" />
                         <option value="Suggestion Two" />
                         <option value="Suggestion Three" />
