@@ -1,9 +1,5 @@
 import { useForm } from 'react-hook-form';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import zod from 'zod';
-
 import { Play } from "@phosphor-icons/react";
 
 import {
@@ -16,31 +12,16 @@ import {
     TaskInput
 } from "./styles";
 
-const newCycleFormValidationSchema = zod.object({
-    task: zod.string().min(3, "Type you task with at least 3 characters!"),
-    minutesAmount: zod.number()
-        .min(5, "The cycles needs to be at least 5 minutes")
-        .max(60, "The cycles needs a maximum of 60 minutes"),
-});
-
 export function Home() {
-    const { register, handleSubmit, watch, formState } = useForm({
-        resolver: zodResolver(newCycleFormValidationSchema),
-    });
-
-
-    const task = watch("task");
-    const isSubmitDisabled = !task;
+    const { register, handleSubmit, watch } = useForm();
 
     function handleCreateNewCycle(data: any) {
-        // console.log(data);
+        console.log(data);
     }
-
-    console.log(formState.errors);
 
     return (
         <HomeContainer>
-            <form onSubmit={handleSubmit(handleCreateNewCycle)} >
+            <form onSubmit={handleSubmit(handleCreateNewCycle} >
                 <FormContainer>
                     <label htmlFor="task">I'll work on</label>
                     <TaskInput
@@ -62,7 +43,7 @@ export function Home() {
                         type="number"
                         step={5}
                         min={5}
-                        // max={60}
+                        max={60}
                         placeholder="00"
                         {...register("minutesAmount", { valueAsNumber: true })}
                     />
@@ -78,7 +59,7 @@ export function Home() {
                     <span>0</span>
                 </CountdownContainer>
 
-                <StartCountdownButton disabled={isSubmitDisabled} type="submit">
+                <StartCountdownButton type="submit">
                     <Play size={25} />
                     Start
                 </StartCountdownButton >
