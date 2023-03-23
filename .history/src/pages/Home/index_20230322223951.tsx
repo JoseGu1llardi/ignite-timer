@@ -44,6 +44,7 @@ export function Home() {
         }
     });
 
+
     function handleCreateNewCycle(data: NewCycleFormData) {
         const id = String(new Date().getTime());
 
