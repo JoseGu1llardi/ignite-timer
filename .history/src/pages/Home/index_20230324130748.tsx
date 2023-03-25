@@ -1,7 +1,3 @@
-import { useState, useEffect } from 'react';
-
-import { differenceInSeconds } from 'date-fns';
-
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +15,7 @@ import {
     StartCountdownButton,
     TaskInput
 } from "./styles";
+import { useState } from 'react';
 
 const newCycleFormValidationSchema = zod.object({
     task: zod.string().min(3, "Type you task with at least 3 characters!"),
@@ -51,14 +48,6 @@ export function Home() {
 
     const activeCycle = cycles.find(cycle => cycle.id === activeCycleId);
 
-    useEffect(() => {
-        if (activeCycle) {
-            setInterval(() => {
-                setAmountSecondsPassed(differenceInSeconds(new Date(), activeCycle.startDate));
-            }, 1000)
-        }
-    }, [activeCycle]);
-
     function handleCreateNewCycle(data: NewCycleFormData) {
         const id = String(new Date().getTime());
 
@@ -74,6 +63,7 @@ export function Home() {
 
         reset();
     }
+
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
     const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;

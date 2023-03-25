@@ -110,7 +110,7 @@ export function Home() {
                         id="minutesAmount"
                         type="number"
                         step={5}
-                        min={5}
+                        min={1}
                         max={60}
                         placeholder="00"
                         {...register("minutesAmount", { valueAsNumber: true })}

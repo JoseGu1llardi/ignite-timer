@@ -57,7 +57,7 @@ export function Home() {
                 setAmountSecondsPassed(differenceInSeconds(new Date(), activeCycle.startDate));
             }, 1000)
         }
-    }, [activeCycle]);
+    }, []);
 
     function handleCreateNewCycle(data: NewCycleFormData) {
         const id = String(new Date().getTime());
