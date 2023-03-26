@@ -35,7 +35,6 @@ interface Cycle {
     task: string;
     minutesAmount: number;
     startDate: Date;
-    interruptedDate?: Date;
 }
 
 export function Home() {
@@ -85,19 +84,6 @@ export function Home() {
         reset();
     }
 
-    function handleInterruptCycle() {
-        setCycles(cycles.map(cycle => {
-            if (cycle.id === activeCycleId) {
-                return { ...cycle, interruptedDate: new Date() }
-            } else {
-                return cycle
-            }
-        })
-        )
-
-        setActiveCycleId(null);
-    }
-
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
     const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
 
@@ -125,7 +111,6 @@ export function Home() {
                         id="task"
                         list="tasks-suggestion"
                         placeholder="give a name to your project..."
-                        disabled={!!activeCycle}
                         {...register('task')}
                     />
 
@@ -143,7 +128,6 @@ export function Home() {
                         min={5}
                         max={60}
                         placeholder="00"
-                        disabled={!!activeCycle}
                         {...register("minutesAmount", { valueAsNumber: true })}
                     />
 
@@ -160,7 +144,7 @@ export function Home() {
 
                 {
                     activeCycle ? (
-                        <StopCountdownButton type="button" onClick={handleInterruptCycle} >
+                        <StopCountdownButton type="button">
                             <HandPalm size={25} />
                             Interrupt
                         </StopCountdownButton >

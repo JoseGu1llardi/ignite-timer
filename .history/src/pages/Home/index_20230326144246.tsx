@@ -160,7 +160,7 @@ export function Home() {
 
                 {
                     activeCycle ? (
-                        <StopCountdownButton type="button" onClick={handleInterruptCycle} >
+                        <StopCountdownButton type="button">
                             <HandPalm size={25} />
                             Interrupt
                         </StopCountdownButton >

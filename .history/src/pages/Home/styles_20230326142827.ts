@@ -124,4 +124,8 @@ export const StopCountdownButton = styled(BaseCountdownButton)`
     &:not(:disabled):hover {
         background: ${({ theme }) => theme["red-700"]};
     }
+    
+    &:focus {
+        border-color: transparent;
+    }
 `
