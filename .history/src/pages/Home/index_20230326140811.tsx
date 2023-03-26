@@ -95,8 +95,9 @@ export function Home() {
     useEffect(() => {
         if (activeCycle) {
             document.title = `${minutes}:${seconds}`
+
         }
-    }, [minutes, seconds, activeCycle]);
+    }, [minutes, seconds]);
 
     const task = watch("task");
     const isSubmitDisabled = !task;
