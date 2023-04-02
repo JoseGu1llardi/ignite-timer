@@ -22,7 +22,7 @@ import { CyclesContext } from '../../contexts/CyclesContext';
 const newCycleFormValidationSchema = zod.object({
     task: zod.string().min(3, "Type you task with at least 3 characters!"),
     minutesAmount: zod.number()
-        .min(5, "The cycles needs to be at least 5 minutes")
+        .min(1, "The cycles needs to be at least 5 minutes")
         .max(60, "The cycles needs a maximum of 60 minutes"),
 });
 
