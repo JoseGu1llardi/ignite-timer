@@ -32,10 +32,9 @@ interface Cycle {
 interface CyclesContextData {
     activeCycle: Cycle | undefined;
     activeCycleId: string | null;
-    amountSecondsPassed: number;
     markCurrentCycleAsFineshed: () => void;
-    setSecondsPassed: (seconds: number) => void;
     /* setCycles: Dispatch<React.SetStateAction<Cycle[]>> */
+    amountSecondsPassed: number;
 }
 
 const newCycleFormValidationSchema = zod.object({
@@ -65,10 +64,6 @@ export function Home() {
     });
 
     const { handleSubmit, watch, reset } = newCycleForm;
-
-    function setSecondsPassed(seconds: number) {
-        setAmountSecondsPassed(seconds);
-    }
 
     function markCurrentCycleAsFineshed() {
         setCycles(state => state.map(cycle => {
@@ -117,14 +112,7 @@ export function Home() {
     return (
         <HomeContainer>
             <form onSubmit={handleSubmit(handleCreateNewCycle)}  >
-                <CyclesContext.Provider
-                    value={{
-                        activeCycle,
-                        activeCycleId,
-                        amountSecondsPassed,
-                        markCurrentCycleAsFineshed,
-                        setSecondsPassed
-                    }}>
+                <CyclesContext.Provider value={{ activeCycle, activeCycleId, markCurrentCycleAsFineshed, amountSecondsPassed }}>
                     <FormProvider {...newCycleForm} >
                         <NewCycleForm />
                     </FormProvider>

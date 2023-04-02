@@ -34,7 +34,7 @@ interface CyclesContextData {
     activeCycleId: string | null;
     amountSecondsPassed: number;
     markCurrentCycleAsFineshed: () => void;
-    setSecondsPassed: (seconds: number) => void;
+    setSecondsPassed: () => void;
     /* setCycles: Dispatch<React.SetStateAction<Cycle[]>> */
 }
 
@@ -121,9 +121,8 @@ export function Home() {
                     value={{
                         activeCycle,
                         activeCycleId,
-                        amountSecondsPassed,
                         markCurrentCycleAsFineshed,
-                        setSecondsPassed
+                        amountSecondsPassed
                     }}>
                     <FormProvider {...newCycleForm} >
                         <NewCycleForm />

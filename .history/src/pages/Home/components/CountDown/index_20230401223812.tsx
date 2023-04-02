@@ -6,13 +6,7 @@ import { CountdownContainer, Separator } from "./styles";
 import { CyclesContext } from "../..";
 
 export function CountDown() {
-    const {
-        activeCycle,
-        activeCycleId,
-        amountSecondsPassed,
-        markCurrentCycleAsFineshed,
-        setSecondsPassed
-    } = useContext(CyclesContext);
+    const { activeCycle, activeCycleId, markCurrentCycleAsFineshed } = useContext(CyclesContext);
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
 
@@ -29,10 +23,10 @@ export function CountDown() {
                 if (secondsDifference >= totalSeconds) {
                     markCurrentCycleAsFineshed()
 
-                    setSecondsPassed(totalSeconds);
+                    setAmountSecondsPassed(totalSeconds);
                     clearInterval(interval);
                 } else {
-                    setSecondsPassed(secondsDifference);
+                    setAmountSecondsPassed(secondsDifference);
                 }
 
             }, 1000)
