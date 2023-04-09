@@ -1,10 +1,17 @@
 import { useState, createContext, ReactNode, useReducer } from 'react';
 
-import { ActionTypes, Cycle, cyclesReducer } from '../reducers/cycles';
-
 interface CreateCycleData {
     task: string;
     minutesAmount: number;
+}
+
+interface Cycle {
+    id: string;
+    task: string;
+    minutesAmount: number;
+    startDate: Date;
+    interruptedDate?: Date;
+    finishedDate?: Date;
 }
 
 interface CyclesContextData {
@@ -23,13 +30,19 @@ interface CyclesContextProviderProps {
     children: ReactNode;
 }
 
+interface CyclesState {
+    cycles: Cycle[]
+    activeCycleId: string | null
+}
+
 export const CyclesContext = createContext({} as CyclesContextData);
 
 export function CyclesContextProvider({ children }: CyclesContextProviderProps) {
 
-    const [cyclesState, dispatch] = useReducer(cyclesReducer, {
-        cycles: [],
-        activeCycleId: null
+    const [cyclesState, dispatch] = useReducer(
+        , {
+            cycles: [],
+            activeCycleId: null
     });
 
     const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
@@ -40,7 +53,7 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
 
     function markCurrentCycleAsFineshed() {
         dispatch({
-            type: ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED,
+            type: "MARK_CURRENT_CYCLE_AS_FINISHED",
             payload: {
                 activeCycleId
             }
@@ -61,7 +74,7 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
         }
 
         dispatch({
-            type: ActionTypes.ADD_NEW_CYCLE,
+            type: "ADD_NEW_CYCLE",
             payload: {
                 newCycle
             }
@@ -72,7 +85,7 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
 
     function interruptCurrentCycle() {
         dispatch({
-            type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
+            type: "INTERRUPT_CURRENT_CYCLE",
             payload: {
                 activeCycleId
             }
