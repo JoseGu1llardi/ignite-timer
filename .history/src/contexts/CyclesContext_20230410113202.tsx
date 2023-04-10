@@ -41,7 +41,7 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
         if (storedStateAsJSON) {
             return JSON.parse(storedStateAsJSON);
         }
-    })
+    });
 
     const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
 

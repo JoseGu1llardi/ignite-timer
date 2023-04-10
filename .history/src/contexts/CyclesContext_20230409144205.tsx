@@ -1,11 +1,7 @@
-import { useState, createContext, ReactNode, useReducer, useEffect } from 'react';
+import { useState, createContext, ReactNode, useReducer } from 'react';
 
 import { Cycle, cyclesReducer } from '../reducers/cycles/reducer';
-import {
-    addNewCycleAction,
-    interruptCurrentCycleAction,
-    markCurrentCycleAsFinishedAction
-} from '../reducers/cycles/actions';
+import { ActionTypes } from '../reducers/cycles/actions';
 
 interface CreateCycleData {
     task: string;
@@ -35,28 +31,21 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
     const [cyclesState, dispatch] = useReducer(cyclesReducer, {
         cycles: [],
         activeCycleId: null
-    }, () => {
-        const storedStateAsJSON = localStorage.getItem("@ignite-timer:cycles-state-1.0.0");
-
-        if (storedStateAsJSON) {
-            return JSON.parse(storedStateAsJSON);
-        }
-    })
+    });
 
     const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
-
-    useEffect(() => {
-        const stateJSON = JSON.stringify(cyclesState);
-
-        localStorage.setItem("@ignite-timer:cycles-state-1.0.0", stateJSON)
-    }, [cyclesState]);
 
     const { cycles, activeCycleId } = cyclesState;
 
     const activeCycle = cycles.find(cycle => cycle.id === activeCycleId);
 
     function markCurrentCycleAsFineshed() {
-        dispatch(markCurrentCycleAsFinishedAction());
+        dispatch({
+            type: ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED,
+            payload: {
+                activeCycleId
+            }
+        });
     }
 
     function setSecondsPassed(seconds: number) {
@@ -72,13 +61,23 @@ export function CyclesContextProvider({ children }: CyclesContextProviderProps) 
             startDate: new Date()
         }
 
-        dispatch(addNewCycleAction(newCycle));
+        dispatch({
+            type: ActionTypes.ADD_NEW_CYCLE,
+            payload: {
+                newCycle
+            }
+        });
 
         setAmountSecondsPassed(0);
     }
 
     function interruptCurrentCycle() {
-        dispatch(interruptCurrentCycleAction());
+        dispatch({
+            type: ActionTypes.INTERRUPT_CURRENT_CYCLE,
+            payload: {
+                activeCycleId
+            }
+        });
 
         document.title = "ig-Timer";
     }
